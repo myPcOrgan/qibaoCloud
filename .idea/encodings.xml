@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/qibao-activity-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-activity-service/qibao-activity-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-backend-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-backend-service/qibao-backend-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-backend-webapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-common-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-common-service/qibao-common-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-common-service/qibao-common-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-common-service/qibao-common-service-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-frontend-webapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-goods-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-goods-service/qibao-goods-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-goods-service/qibao-goods-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-order-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-order-service/qibao-order-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-payment-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-payment-service/qibao-payment-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-payment-service/qibao-payment-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-user-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qibao-user-service/qibao-user-service-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../user-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../user-service/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../user-service/mgmt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../user-service/service" charset="UTF-8" />
+  </component>
+</project>

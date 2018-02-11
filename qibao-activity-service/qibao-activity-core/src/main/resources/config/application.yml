@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: qibao-activity-service
+
+logging:
+  level:
+    com:
+      qibao:
+        activity:
+          mapper: DEBUG

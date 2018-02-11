@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qibao.goods.mapper.GoodsEOMapper">
+    <resultMap id="BaseResultMap" type="com.qibao.goods.entity.GoodsEO">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="category" property="category" jdbcType="BIGINT"/>
+        <result column="goods_no" property="goodsNo" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR"/>
+        <result column="goods_num" property="goodsNum" jdbcType="VARCHAR"/>
+        <result column="goods_amount" property="goodsAmount" jdbcType="DOUBLE"/>
+        <result column="img_id" property="imgId" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="selectSql">
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="category != null">
+                    AND category = #{category}
+                </if>
+                <if test="goodsNo != null and goodsNo != ''">
+                    AND goods_no = #{goodsNo}
+                </if>
+                <if test="goodsName != null and goodsName != ''">
+                    AND goods_name = #{goodsName}
+                </if>
+                <if test="goodsRole != null and goodsRole != ''">
+                    AND goods_role = #{goodsRole}
+                </if>
+                <if test="goodsUnit != null and goodsUnit != ''">
+                    AND goods_unit = #{goodsUnit}
+                </if>
+                <if test="goodsNum != null and goodsNum != ''">
+                    AND goods_num = #{goodsNum}
+                </if>
+                <if test="goodsAmount != null">
+                    AND goods_amount= #{goodsAmount}
+                </if>
+                <if test="imgId != null">
+                    AND img_id= #{imgId}
+                </if>
+                <if test="createTime != null">
+                    AND create_time = #{createTime}
+                </if>
+                <if test="lastUpdateTime != null">
+                    AND last_update_time = #{lastUpdateTime}
+                </if>
+                <if test="isDeleted != null">
+                    AND is_deleted = #{isDeleted}
+                </if>
+            </trim>
+        </where>
+    </sql>
+    <!-- 查询符合条件的实体对象 -->
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap"
+            resultType="com.qibao.goods.entity.GoodsEO">
+        select * from t_goods a JOIN (SELECT ID FROM t_goods
+        <include refid="selectSql"/>
+        <if test="ORDERBY != null and ORDERBY != ''">
+            ORDER BY ${ORDERBY}
+        </if>
+        <if test="ORDER != null and ORDER != ''">
+            ${ORDER}
+        </if>
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="start != null">
+            OFFSET #{start}
+        </if>
+        )b ON a.ID=b.ID
+    </select>
+    <!-- 批量更新 -->
+    <update id="batchUpdateGoods" parameterType="java.util.List">
+        update t_goods
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="goods_num=case" suffix="end,">
+                <foreach collection="list" item="goods" index="index">
+                    <if test="goods.goodsNum!=null">
+                        when id=#{goods.id} then #{goods.goodsNum}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="goods_amount=case" suffix="end,">
+                <foreach collection="list" item="goods" index="index">
+                    <if test="goods.goodsAmount!=null">
+                        when id=#{goods.id} then #{goods.goodsAmount}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="last_update_time=case" suffix="end,">
+                <foreach collection="list" item="goods" index="index">
+                    <if test="goods.lastUpdateTime!=null">
+                        when id=#{goods.id} then #{goods.lastUpdateTime}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="goods" index="index">
+            id=#{goods.id}
+        </foreach>
+    </update>
+</mapper>

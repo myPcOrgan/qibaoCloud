@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qibao</groupId>
+    <artifactId>qibao-goods-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>qibao-goods-api</module>
+        <module>qibao-goods-service-core</module>
+    </modules>
+    <packaging>pom</packaging>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+    </parent>
+
+    <properties>
+        <!-- MyBatis Generator -->
+        <mybatis.generator.version>1.3.2</mybatis.generator.version>
+        <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+        <targetMapperPackage>com.qibao.common.mapper</targetMapperPackage>
+        <targetEntityPackage>com.qibao.common.entity</targetEntityPackage>
+        <!-- tk.mybatis -->
+        <tk.mybatis.version>3.3.6</tk.mybatis.version>
+        <persistence.version>1.0</persistence.version>
+        <mapper.plugin>tk.mybatis.mapper.generator.MapperPlugin</mapper.plugin>
+        <mapper.Mapper>com.qibao.common.mapper.IBaseMapper</mapper.Mapper>
+
+        <!-- public properties -->
+        <ob.version>1.0.0-SNAPSHOT</ob.version>
+        <!-- spring cloud -->
+        <spring-cloud.version>Dalston.SR4</spring-cloud.version>
+        <spring-boot.version>RELEASE</spring-boot.version>
+        <mysql.version>5.1.45</mysql.version>
+        <json.version>1.2.22</json.version>
+        <commons.version>RELEASE</commons.version>
+        <mybatis.generator.version>1.3.2</mybatis.generator.version>
+        <tk.mybatis.version>3.5.0</tk.mybatis.version>
+        <!-- private properties -->
+        <!-- repository setting -->
+        <!--<nexus.content.public.url>http://dev.658.com/nexus/content/groups/public/</nexus.content.public.url>
+        <nexus.deploy.snapshot.url>http://dev.658.com/nexus/content/repositories/snapshots/</nexus.deploy.snapshot.url>
+        <nexus.deploy.release.url>http://dev.658.com/nexus/content/repositories/releases/</nexus.deploy.release.url>-->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 数据库驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!-- common -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+            <!-- json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${json.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>

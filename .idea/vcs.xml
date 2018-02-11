@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/qibao-activity-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-backend-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-backend-webapi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-frontend-webapi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-goods-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-order-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-payment-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qibao-user-service" vcs="Git" />
+  </component>
+</project>

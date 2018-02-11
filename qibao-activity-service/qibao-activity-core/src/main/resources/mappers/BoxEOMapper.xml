@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.activity.mapper.BoxEOMapper">
+    <resultMap id="BaseResultMap" type="com.qibao.activity.entity.BoxEO">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="box_no" jdbcType="VARCHAR" property="boxNo"/>
+        <result column="game_no" jdbcType="VARCHAR" property="gameNo"/>
+        <result column="box_name" jdbcType="VARCHAR" property="boxName"/>
+        <result column="box_num" jdbcType="DOUBLE" property="boxNum"/>
+        <result column="box_type" jdbcType="INTEGER" property="boxType"/>
+        <result column="box_unit" jdbcType="VARCHAR" property="boxUnit"/>
+        <result column="box_popularity" jdbcType="INTEGER" property="boxPopularity"/>
+        <result column="box_popularity_today" jdbcType="INTEGER" property="boxPopularityToday"/>
+        <result column="box_gold_coefficient" property="boxGoldCoefficient" jdbcType="DOUBLE"/>
+        <result column="box_gold_pond" property="boxGoldPond" jdbcType="DOUBLE"/>
+        <result column="box_gold_pond_max" property="boxGoldPondMax" jdbcType="DOUBLE"/>
+        <result column="box_gold_pond_overflow" property="boxGoldPondOverflow" jdbcType="DOUBLE"/>
+        <result column="box_exceed_count" property="boxExceedCount" jdbcType="INTEGER"/>
+        <result column="img_id" jdbcType="VARCHAR" property="imgId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
+    </resultMap>
+
+    <resultMap id="ResultBoxVO" type="com.qibao.activity.entity.vo.BoxVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="box_no" jdbcType="VARCHAR" property="boxNo"/>
+        <result column="game_no" jdbcType="VARCHAR" property="gameNo"/>
+        <result column="box_name" jdbcType="VARCHAR" property="boxName"/>
+        <result column="box_num" jdbcType="DOUBLE" property="boxNum"/>
+        <result column="box_type" jdbcType="INTEGER" property="boxType"/>
+        <result column="box_unit" jdbcType="VARCHAR" property="boxUnit"/>
+        <result column="box_popularity" jdbcType="INTEGER" property="boxPopularity"/>
+        <result column="box_popularity_today" jdbcType="INTEGER" property="boxPopularityToday"/>
+        <result column="box_gold_coefficient" property="boxGoldCoefficient" jdbcType="DOUBLE"/>
+        <result column="box_gold_pond_max" property="boxGoldPondMax" jdbcType="DOUBLE"/>
+        <result column="box_exceed_count" property="boxExceedCount" jdbcType="INTEGER"/>
+        <result column="img_id" jdbcType="VARCHAR" property="imgId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
+    </resultMap>
+
+    <select id="selectByIdForUpdate" parameterType="Long" resultMap="BaseResultMap">
+        select * from t_box t
+        where t.id=#{id} for update
+    </select>
+
+    <select id="selectBoxDetailList" parameterType="map" resultMap="ResultBoxVO">
+        select t.id,t.box_no,t.game_no,t.box_name,t.box_num,t.box_type,t.box_unit,t.box_gold_coefficient
+        ,t.box_gold_pond_max,t.box_exceed_count,t.is_deleted,t.is_enable,count(t2.box_id) prize_count
+        ,sum(t3.box_popularity) box_popularity,sum(t3.box_popularity_today) box_popularity_today from t_box t
+        left join t_prize t2 on t2.box_id=t.id and t2.is_deleted=false and t2.is_enable=true
+        left join (select count(1) box_popularity,0 box_popularity_today,t.relate_id from t_user_prize t
+        where t.prize_type=2
+        group by t.relate_id
+        union
+        select 0 box_popularity,count(1) box_popularity_today,t.relate_id from t_user_prize t
+        where t.prize_type=2
+        and to_days(t.create_time)=to_days(now())
+        group by t.relate_id) t3 on t3.relate_id=t2.id
+        group by t.id
+        <where>
+            <trim prefixOverrides="AND">
+                t.is_deleted=false and t.is_enable=true
+                <if test="boxName != null and boxName != ''">
+                    t.box_name like concat('%',#{boxName},'%')
+                </if>
+            </trim>
+        </where>
+    </select>
+
+</mapper>

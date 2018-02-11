@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qibao.goods.mapper.CategoryEOMapper">
+    <resultMap id="BaseResultMap" type="com.qibao.goods.entity.CategoryEO">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="cate_code" property="cateCode" jdbcType="VARCHAR"/>
+        <result column="cate_name" property="cateName" jdbcType="VARCHAR"/>
+        <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR"/>
+        <result column="level_id" property="levelId" jdbcType="VARCHAR"/>
+        <result column="cate_level" property="cateLevel" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="selectSql">
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="cateCode != null and cateCode != ''">
+                    AND cate_code = #{cateCode}
+                </if>
+                <if test="cateName != null and cateName != ''">
+                    AND cate_name = #{cateName}
+                </if>
+                <if test="goodsUnit != null and goodsUnit != ''">
+                    AND goods_unit = #{goodsUnit}
+                </if>
+                <if test="levelId != null and levelId != ''">
+                    AND level_id = #{levelId}
+                </if>
+                <if test="cateLevel != null">
+                    AND cate_level= #{cateLevel}
+                </if>
+                <if test="parentId != null">
+                    AND parent_id= #{parentId}
+                </if>
+                <if test="createTime != null">
+                    AND create_time = #{createTime}
+                </if>
+                <if test="lastUpdateTime != null">
+                    AND last_update_time = #{lastUpdateTime}
+                </if>
+                <if test="isDeleted != null">
+                    AND is_deleted = #{isDeleted}
+                </if>
+                <if test="isEnable != null">
+                    AND is_enable = #{isEnable}
+                </if>
+            </trim>
+        </where>
+    </sql>
+    <!-- 查询符合条件的实体对象 -->
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap"
+            resultType="com.qibao.goods.entity.CategoryEO">
+        select * from t_category a JOIN (SELECT ID FROM t_category
+        <include refid="selectSql"/>
+        <if test="ORDERBY != null and ORDERBY != ''">
+            ORDER BY ${ORDERBY}
+        </if>
+        <if test="ORDER != null and ORDER != ''">
+            ${ORDER}
+        </if>
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="start != null">
+            OFFSET #{start}
+        </if>
+        )b ON a.ID=b.ID
+    </select>
+</mapper>

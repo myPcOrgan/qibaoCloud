@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.payment.mapper.GoldBalanceEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.payment.entity.GoldBalanceEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="begin_gold" jdbcType="DOUBLE" property="beginGold" />
+    <result column="platform_give_gold" jdbcType="DOUBLE" property="platformGiveGold" />
+    <result column="buy_gold" jdbcType="DOUBLE" property="buyGold" />
+    <result column="deposit_gold" jdbcType="DOUBLE" property="depositGold" />
+    <result column="roll_give_gold" jdbcType="DOUBLE" property="rollGiveGold" />
+    <result column="roll_get_gold" jdbcType="DOUBLE" property="rollGetGold" />
+    <result column="open_box_consume_gold" jdbcType="DOUBLE" property="openBoxConsumeGold" />
+    <result column="open_box_get_gold" jdbcType="DOUBLE" property="openBoxGetGold" />
+    <result column="gold_pool" jdbcType="DOUBLE" property="goldPool" />
+    <result column="gold_repository" jdbcType="DOUBLE" property="goldRepository" />
+    <result column="get_back_gold" jdbcType="DOUBLE" property="getBackGold" />
+    <result column="poundage" jdbcType="DOUBLE" property="poundage" />
+    <result column="end_gold" jdbcType="DOUBLE" property="endGold" />
+    <result column="diff_gold" jdbcType="DOUBLE" property="diffGold" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="total_gold_pool" jdbcType="DOUBLE" property="totalGoldPool" />
+    <result column="total_gold_repository" jdbcType="DOUBLE" property="totalGoldRepository" />
+    <result column="platform_get_gold" jdbcType="DOUBLE" property="platformGetGold" />
+    <result column="total_platform_get_gold" jdbcType="DOUBLE" property="totalPlatformGetGold" />
+  </resultMap>
+
+
+
+<select id="selectGoldBalance" parameterType="map" resultMap="BaseResultMap">
+    select * from t_gold_balance
+    <include refid="selectSql"/>
+    <if test="ORDERBY != null and ORDERBY != ''">
+      ORDER BY ${ORDERBY}
+    </if>
+    <if test="ORDER != null and ORDER != ''">
+      ${ORDER}
+    </if>
+  </select>
+
+  <sql id="selectSql">
+    <where>
+      <trim prefixOverrides="AND">
+        <if test="startTime != null ">
+          AND begin_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null ">
+          AND begin_time &lt;= #{endTime}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <select id="countByMap" parameterType="map" resultType="int">
+    select count(*) from t_gold_balance
+    <include refid="selectSql" />
+  </select>
+</mapper>

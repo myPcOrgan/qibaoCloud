@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.backend.mapper.FunctionEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.backend.entity.FunctionEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="function_name" jdbcType="VARCHAR" property="functionName" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="function_desc" jdbcType="VARCHAR" property="functionDesc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+</mapper>

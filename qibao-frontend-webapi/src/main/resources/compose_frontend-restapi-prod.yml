@@ -1,0 +1,55 @@
+qibao-frontend-restapi:
+  restart: always
+  #hostname: frontend-restapi  #容器内部访问的地址
+  environment:
+    - LANG=C.UTF-8
+    - JAVA_UPDATE=144
+    - JAVA_BUILD=01
+    - JAVA_PATH=090f390dda5b47b9b721c7dfaa008135
+    - JAVA_HOME=/usr/lib/jvm/default-jvm
+    - WORK_PATH=/home/project/docker
+    - APP_NAME=$APPNAME
+  expose:
+    - 8080/tcp  # 容器暴露的端口，必须跟 server.port=8080 一致
+  memswap_limit: 0
+  labels:
+    aliyun.scale: '2'  #容器启动个数，多个的话 hostname 解析会负载均衡
+    aliyun.rolling_updates: 'true'
+    #aliyun.routing.port_8080: 'http://frontend-restapi' #暴露外网的域名，默认后缀是 alcs.5173.com
+    aliyun.log_store_frontend-restapi-stdout: stdout   #日志服务收集，  格式：aliyun.log_store_{name}: path
+  #extra_hosts:
+  #  - "openapi.5173.com:61.130.29.23"   #hosts
+  command:   #这里的命令会拼接到Dockerfile的 ENTRYPOINT（容器启动执行的命令） 后面， command相当于参数
+    - '-jar'
+    - $APPNAME
+    - >-
+      --spring.profiles.active=prod
+    - >-
+      --spring.datasource.url=$MYSQL_URL
+    - >-
+      --spring.datasource.username=$MYSQL_USERNAME
+    - >-
+      --spring.datasource.password=$MYSQL_PASSWORD
+    - >-
+      --spring.redis.host=$REDIS_HOST
+    - >-
+      --spring.redis.port=$REDIS_PORT
+    - >-
+      --spring.redis.password=$REDIS_PASSWORD
+    - >-
+      --payment.key=$PAYMENT_KEY
+    - >-
+      --vpgame.api-key=$VPGAME_API_KEY
+    - >-
+      --vpgame.api-secret=$VPGAME_API_SECRET
+    - >-
+      --alyAccesskey=$ALY_ACCESS_KEY
+    - >-
+      --alySecret=$ALY_SECRET
+  shm_size: 0
+  image: $IMAGE_NAME #启动的镜像
+  memswap_reservation: 0
+  volumes:
+    - 'oss-ops-test:/tmp/config:ro' #挂在一个volume到容器里面，这里是把oss某个bucket挂载到了容器
+  kernel_memory: 0
+  mem_limit: 0

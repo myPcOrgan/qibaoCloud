@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: common-service-goods
+  cloud:
+    config:
+      server:
+        git:
+          uri: #git仓库地址
+          search-paths: #仓库路径
+          username: #用户名
+          password: #密码
+      label: #git仓库分支
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qibao?characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name : com.mysql.jdbc.Driver
+    druid :
+      initial-pageSize : 1
+      min-idle : 1
+      max-active : 20
+      test-on-borrow : true
+      stat-view-servlet :
+        allow : true
+  redis:
+    database: 0
+    host: 47.96.142.196
+    port: 6379
+    pool:
+      max-total: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+      timeout: 0
+eureka:
+  instance:
+    hostname: jimlee
+    instance-id:  jimlee:8080
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://47.96.142.196:8761/eureka/

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: qibao-user-service
+server:
+  port: 8080
+#logging:
+#  path: /log/qibao/
+#  config: classpath:config/logback.xml
+#  level:
+#    org:
+#      apache:
+#        coyote:
+#          http11:
+#            Http11InputBuffer: DEBUG

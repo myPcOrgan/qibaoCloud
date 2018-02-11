@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.user.dao.UserAccountEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.user.entity.UserAccountEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="wechart" jdbcType="VARCHAR" property="wechart" />
+    <result column="qq_code" jdbcType="VARCHAR" property="qqCode" />
+    <result column="wechart_code" jdbcType="VARCHAR" property="wechartCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_loginout_time" jdbcType="TIMESTAMP" property="lastLoginoutTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="is_forbid" jdbcType="TINYINT" property="isForbid" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="user_grade" jdbcType="TINYINT" property="userGrade" />
+    <result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+    <result column="register_device" jdbcType="VARCHAR" property="registerDevice" />
+    <result column="login_type" jdbcType="TINYINT" property="loginType" />
+    <result column="total_amount" jdbcType="DOUBLE" property="totalAmount" />
+    <result column="exceed_count" jdbcType="INTEGER" property="exceedCount" />
+    <result column="is_forbid_create_room" jdbcType="TINYINT" property="isForbidCreateRoom" />
+  </resultMap>
+
+  <select id="listUserAccountByMap" parameterType="map" resultMap="BaseResultMap">
+    select * from t_user
+    <include refid="selectSql" />
+    <if test="orderBy != null and orderBy != ''">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="ORDER != null and ORDER != ''">
+      ${ORDER}
+    </if>
+  </select>
+
+  <sql id="selectSql">
+    <where>
+      <trim prefixOverrides="AND">
+        <if test="id != null">
+          AND id = #{id}
+        </if>
+        <if test="userAccount != null and userAccount != ''">
+          AND user_account like concat("%",#{userAccount},"%")
+        </if>
+        <if test="realName != null and realName != ''">
+          AND real_name like concat("%",#{realName},"%")
+        </if>
+        <if test="nickName != null and nickName != ''">
+          AND nick_name like concat("%",#{nickName},"%")
+        </if>
+        <if test="userImg != null and userImg != ''">
+          AND user_img = #{userImg}
+        </if>
+        <if test="mobilePhone != null and mobilePhone != ''">
+          AND mobile_phone like concat("%",#{mobilePhone},"%")
+        </if>
+        <if test="qq != null and qq != ''">
+          AND qq like concat("%",#{qq},"%")
+        </if>
+        <if test="wechart != null and wechart != ''">
+          AND wechart like concat("%",#{wechart},"%")
+        </if>
+        <if test="createStartTime != null ">
+          <![CDATA[ AND create_time >= #{createStartTime} ]]>
+        </if>
+        <if test="createEndTime != null ">
+          <![CDATA[ AND create_time <= #{createEndTime} ]]>
+        </if>
+        <if test="lastLoginStartTime != null ">
+          <![CDATA[ AND last_login_time >= #{lastLoginStartTime} ]]>
+        </if>
+        <if test="lastLoginEndTime != null ">
+          <![CDATA[ AND last_login_time <= #{lastLoginEndTime} ]]>
+        </if>
+        <if test="lastLoginoutStartTime != null ">
+          <![CDATA[ AND last_loginout_time >= #{lastLoginoutStartTime} ]]>
+        </if>
+        <if test="lastLoginoutEndTime != null ">
+          <![CDATA[ AND last_loginout_time <= #{lastLoginoutEndTime} ]]>
+        </if>
+        <if test="lastUpdateStartTime != null ">
+          <![CDATA[ AND last_update_time >= #{lastUpdateStartTime} ]]>
+        </if>
+        <if test="lastUpdateEndTime != null ">
+          <![CDATA[ AND last_update_time <= #{lastUpdateEndTime} ]]>
+        </if>
+        <if test="isForbid != null">
+          AND is_forbid = #{isForbid}
+        </if>
+        <if test="isDeleted != null">
+          AND is_deleted = #{isDeleted}
+        </if>
+        <if test="userGrade != null">
+          AND user_grade = #{userGrade}
+        </if>
+        <if test="registerIp != null">
+          AND register_ip = #{registerIp}
+        </if>
+        <if test="messageType != null">
+          AND register_device = #{registerDevice}
+        </if>
+        <if test="loginType != null">
+          AND login_type = #{loginType}
+        </if>
+        <if test="isForbidCreateRoom != null">
+          AND is_forbid_create_room = #{isForbidCreateRoom}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <select id="countByMap" parameterType="map" resultType="int">
+    select count(*) from t_user
+    <include refid="selectSql" />
+  </select>
+
+  <select id="sumToatalGold" parameterType="map" resultType="double">
+    select ifnull(sum(total_amount),0) from t_user
+    <include refid="selectSql" />
+  </select>
+
+</mapper>

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: qibao-payment-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: #git仓库地址
+          search-paths: #仓库路径
+          username: #用户名
+          password: #密码
+      label: #git仓库分支
+  datasource:
+    url: jdbc:mysql://192.168.178.122:3306/qibao?characterEncoding=UTF-8
+    username: root
+    password: WZITECH_2011
+    driver-class-name : com.mysql.jdbc.Driver
+    druid :
+      initial-pageSize : 1
+      min-idle : 1
+      max-active : 20
+      test-on-borrow : true
+      stat-view-servlet :
+        allow : true
+  redis:
+    database: 0
+    host: 192.168.178.104
+    port: 6379
+    pool:
+      max-total: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+      timeout: 0
+eureka:
+  instance:
+    hostname: qibao-payment-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://192.168.71.46:1111/eureka/
+

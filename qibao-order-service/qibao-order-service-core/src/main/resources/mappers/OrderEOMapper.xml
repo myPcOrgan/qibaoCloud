@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.order.mapper.OrderEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.order.entity.OrderEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="main_order_no" jdbcType="VARCHAR" property="mainOrderNo" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="mall_order_id" jdbcType="VARCHAR" property="mallOrderId" />
+    <result column="trader" jdbcType="VARCHAR" property="trader" />
+    <result column="amount_money" jdbcType="DOUBLE" property="amountMoney" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="cate_id" jdbcType="BIGINT" property="cateId" />
+    <result column="game_role" jdbcType="VARCHAR" property="gameRole" />
+    <result column="currency_unit" jdbcType="VARCHAR" property="currencyUnit" />
+    <result column="currency_num" jdbcType="DOUBLE" property="currencyNum" />
+    <result column="deal_num" jdbcType="DOUBLE" property="dealNum" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="poundage" jdbcType="DOUBLE" property="poundage" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="service_account" jdbcType="VARCHAR" property="serviceAccount" />
+    <result column="region_server_name" jdbcType="VARCHAR" property="regionServerName" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+  </resultMap>
+
+  <select id="getOrderList" parameterType="map" resultMap="BaseResultMap">
+    select * from t_order
+    <include refid="selectSql" />
+    <if test="ORDERBY != null and ORDERBY != ''">
+      ORDER BY ${ORDERBY}
+    </if>
+    <if test="ORDER != null and ORDER != ''">
+      ${ORDER}
+    </if>
+  </select>
+
+  <sql id="selectSql">
+    <where>
+      <trim prefixOverrides="AND">
+        <if test="mainOrderNo != null">
+          AND main_order_no = #{mainOrderNo}
+        </if>
+        <if test="orderNo != null">
+          AND order_no = #{orderNo}
+        </if>
+        <if test="mallOrderId != null">
+          AND mall_order_id = #{mallOrderId}
+        </if>
+        <if test="goodsId != null">
+          AND goods_id = #{goodsId}
+        </if>
+        <if test="cateId != null">
+          AND cate_Id = #{cateId}
+        </if>
+        <if test="userAccount != null">
+          AND user_account = #{userAccount}
+        </if>
+        <if test="orderNo != null">
+          AND order_no = #{orderNo}
+        </if>
+        <if test="orderType != null">
+          AND order_type = #{orderType}
+        </if>
+        <if test="orderStatus != null">
+          AND order_status = #{orderStatus}
+        </if>
+        <if test="isDeleted != null">
+          AND is_deleted = #{isDeleted}
+        </if>
+        <if test="createStartTime != null ">
+          AND create_time &gt;= #{createStartTime}
+        </if>
+        <if test="createEndTime != null ">
+          AND create_time &lt;= #{createEndTime}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <select id="countByMap" parameterType="map" resultType="int">
+    select count(*) from t_order
+    <include refid="selectSql" />
+  </select>
+
+  <select id="selectOrderForUpdate" parameterType="string" resultMap="BaseResultMap">
+    select * from  t_order
+    where order_no = #{orderNo} for update;
+  </select>
+
+  <select id="selectBuyGoldNum" parameterType="map" resultType="double">
+    select ifnull(sum(o.deal_num),0) from t_order o join t_user u
+    on o.order_type = #{orderType} and o.user_id = u.id and o.order_status = #{orderStatus}
+    <if test="official != null ">
+      AND u.user_grade = #{official}
+    </if>
+    <if test="ordinary != null ">
+      AND u.user_grade in (${ordinary})
+    </if>
+    <if test="startTime != null ">
+      AND o.create_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null ">
+      AND o.create_time &lt;= #{endTime}
+    </if>
+  </select>
+
+  <select id="selectMallTradeGold" parameterType="map" resultType="double">
+    select ifnull(sum(deal_num),0) from t_order
+    where order_type = #{orderType} and order_status = #{orderStatus}
+    <if test="startTime != null ">
+      AND create_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null ">
+      AND create_time &lt;= #{endTime}
+    </if>
+  </select>
+
+  <select id="selectPoundage" parameterType="map" resultType="double">
+    select ifnull(sum(poundage),0) from t_order
+    where order_type = #{orderType} and order_status = #{orderStatus}
+    <if test="startTime != null ">
+      AND create_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null ">
+      AND create_time &lt;= #{endTime}
+    </if>
+  </select>
+
+</mapper>

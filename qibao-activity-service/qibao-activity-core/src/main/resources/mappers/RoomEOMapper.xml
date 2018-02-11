@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.activity.mapper.RoomEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.activity.entity.RoomEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="room_no" jdbcType="VARCHAR" property="roomNo" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="room_name" jdbcType="VARCHAR" property="roomName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="room_status" jdbcType="TINYINT" property="roomStatus" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="room_type" jdbcType="TINYINT" property="roomType" />
+  </resultMap>
+
+  <resultMap id="BaseResultVOMap" type="com.qibao.activity.entity.vo.RoomActivityVO">
+    <id column="id" property="id"/>
+    <result column="room_no" property="roomNo" />
+    <result column="user_id" property="userId" />
+    <result column="room_name" property="roomName" />
+    <result column="create_time" property="createTime" />
+    <result column="room_status"  property="roomStatus" />
+    <result column="is_deleted" property="isDeleted" />
+    <result column="last_update_time" property="lastUpdateTime" />
+    <result column="room_type" property="roomType" />
+    <association property="activity" javaType="com.qibao.activity.entity.vo.ActivityVO">
+      <id column="activity_id" property="id" jdbcType="BIGINT" />
+      <result column="room_id" property="roomId" jdbcType="BIGINT" />
+      <result column="activity_no" property="activityNo" jdbcType="VARCHAR" />
+      <result column="lottery_type" property="lotteryType" jdbcType="TINYINT" />
+      <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+      <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+      <result column="lottery_time" property="lotteryTime" jdbcType="TIMESTAMP" />
+      <result column="lottery_num" property="lotteryNum" jdbcType="INTEGER" />
+      <result column="activity_type" property="activityType" jdbcType="TINYINT" />
+      <result column="room_password" property="roomPassword" jdbcType="VARCHAR" />
+      <result column="total_gold" property="totalGold" jdbcType="DOUBLE" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="active_status" property="activeStatus" jdbcType="TINYINT" />
+      <result column="is_live_room" property="isLiveRoom" />
+      <result column="live_room_url" property="liveRoomUrl" />
+      <result column="description" property="description" />
+      <result column="verify_status" property="verifyStatus" />
+      <result column="total_upvote" property="totalUpvote" jdbcType="INTEGER" />
+      <result column="people_num" property="peopleNum" jdbcType="INTEGER" />
+      <result column="max_join_people" property="maxJoinPeople" jdbcType="INTEGER" />
+    </association>
+  </resultMap>
+
+  <resultMap id="BaseResultVOListMap" type="com.qibao.activity.entity.vo.RoomActivityVO">
+    <id column="id" property="id"/>
+    <result column="room_no" property="roomNo" />
+    <result column="user_id" property="userId" />
+    <result column="room_name" property="roomName" />
+    <result column="create_time" property="createTime" />
+    <result column="room_status"  property="roomStatus" />
+    <result column="is_deleted" property="isDeleted" />
+    <result column="last_update_time" property="lastUpdateTime" />
+    <result column="room_type" property="roomType" />
+    <collection property="activityList" ofType="com.qibao.activity.entity.vo.ActivityVO">
+      <id column="activity_id" property="id" jdbcType="BIGINT" />
+      <result column="room_id" property="roomId" jdbcType="BIGINT" />
+      <result column="activity_no" property="activityNo" jdbcType="VARCHAR" />
+      <result column="lottery_type" property="lotteryType" jdbcType="TINYINT" />
+      <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+      <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+      <result column="lottery_time" property="lotteryTime" jdbcType="TIMESTAMP" />
+      <result column="lottery_num" property="lotteryNum" jdbcType="INTEGER" />
+      <result column="activity_type" property="activityType" jdbcType="TINYINT" />
+      <result column="room_password" property="roomPassword" jdbcType="VARCHAR" />
+      <result column="total_gold" property="totalGold" jdbcType="DOUBLE" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="active_status" property="activeStatus" jdbcType="TINYINT" />
+      <result column="is_live_room" property="isLiveRoom" />
+      <result column="live_room_url" property="liveRoomUrl" />
+      <result column="description" property="description" />
+      <result column="verify_status" property="verifyStatus" />
+      <result column="total_upvote" property="totalUpvote" jdbcType="INTEGER" />
+      <result column="people_num" property="peopleNum" jdbcType="INTEGER" />
+      <result column="max_join_people" property="maxJoinPeople" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+
+  <resultMap id="BackendResultMap" type="com.qibao.activity.entity.vo.BackendRoomVO">
+    <result column="id" property="roomId" />
+    <result column="room_name" property="roomName" />
+    <result column="create_time" property="createTime" />
+    <result column="room_status"  property="roomStatus" />
+    <result column="startTime"  property="startTime" />
+    <result column="endTime"  property="endTime" />
+    <result column="totalNum"  property="totalNum" />
+    <result column="roomTotalUpvote"  property="roomTotalUpvote" />
+  </resultMap>
+
+  <select id="selectRoomInfo" resultMap="BaseResultVOListMap" parameterType="map">
+    SELECT R.*, 
+    A.*,A.id as activity_id
+    FROM t_room R LEFT JOIN t_room_activity A 
+    ON R.id=A.room_id
+    <where>
+      <if test="roomId != null">
+        and R.id = #{roomId}
+      </if>
+      <if test="roomNo != null and roomNo != ''">
+        and R.room_no = #{roomNo}
+      </if>
+      <if test="roomName != null and roomName != ''">
+        and R.room_name like concat('%',#{roomName},'%')
+      </if>
+      <if test="userId != null">
+         and R.user_id = #{userId}
+      </if>
+      <if test="activityType != null">
+        and A.activity_type = #{activityType}
+      </if>
+      <if test="activityIds != null">
+        and A.id in
+        <foreach collection="activityIds" item="aids" open="(" separator="," close=")">
+          #{aids}
+        </foreach>
+      </if>
+      <if test="requestType == 0">
+        and A.active_status != 0 and A.active_status != 4 and A.active_status != 5
+      </if>
+    </where>
+    ORDER BY R.room_type DESC
+    <if test="orderDescri != null and orderDescri != ''">
+      ${orderDescri}
+    </if>
+
+  </select>
+
+
+  <select id="selectBackendList" resultMap="BackendResultMap" parameterType="map">
+    SELECT R.id,
+    R.room_name,
+    R.create_time,
+    R.room_status,
+    max(A.start_time) AS startTime,
+    max(A.end_time) as endTime,
+    sum(A.total_upvote) as roomTotalUpvote,
+    COUNT(A.id) AS totalNum
+    FROM t_room R LEFT JOIN t_room_activity A
+    ON R.id=A.room_id
+    GROUP BY R.id
+  </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+
+
+#公共配置
+spring:
+  application:
+    name: qibao-frontend-webapi
+
+#logging:
+#  path: /log/qibao/
+#  config: classpath:config/logback.xml
+#  level:
+#    org:
+#      apache:
+#        coyote:
+#          http11:
+#            Http11InputBuffer: DEBUG

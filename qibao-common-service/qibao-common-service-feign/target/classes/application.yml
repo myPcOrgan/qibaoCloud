@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: common-service-feign
+server:
+  port: 8002
+
+eureka:
+  instance:
+      hostname: jimlee
+      instance-id:  jimlee:8001
+  client:
+    serviceUrl:
+      defaultZone: http://47.96.142.196:8761/eureka/

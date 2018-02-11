@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.payment.mapper.FinanceBalanceEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.payment.entity.FinanceBalanceEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="begin_balance" jdbcType="DOUBLE" property="beginBalance" />
+    <result column="end_balance" jdbcType="DOUBLE" property="endBalance" />
+    <result column="platform_buy_balance" jdbcType="DOUBLE" property="platformBuyBalance" />
+    <result column="buy_balance" jdbcType="DOUBLE" property="buyBalance" />
+    <result column="sell_balance" jdbcType="DOUBLE" property="sellBalance" />
+    <result column="get_back_balance" jdbcType="DOUBLE" property="getBackBalance" />
+    <result column="repository_balance" jdbcType="DOUBLE" property="repositoryBalance" />
+    <result column="poundage_balance" jdbcType="DOUBLE" property="poundageBalance" />
+    <result column="diff_balance" jdbcType="DOUBLE" property="diffBalance" />
+    <result column="mall_average_price" jdbcType="DOUBLE" property="mallAveragePrice" />
+  </resultMap>
+</mapper>

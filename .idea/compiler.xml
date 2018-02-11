@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="qibao-activity-api" />
+        <module name="qibao-activity-core" />
+        <module name="qibao-backend-api" />
+        <module name="qibao-backend-service-core" />
+        <module name="qibao-backend-webapi" />
+        <module name="qibao-common" />
+        <module name="qibao-frontend-service" />
+        <module name="qibao-goods-api" />
+        <module name="qibao-goods-service-core" />
+        <module name="qibao-order-api" />
+        <module name="qibao-order-service-core" />
+        <module name="qibao-payment-api" />
+        <module name="qibao-payment-service-core" />
+        <module name="qibao-user-service-api" />
+        <module name="qibao-user-service-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demodd" target="1.8" />
+      <module name="mobile-user" target="1.8" />
+      <module name="mobile-user-common" target="1.8" />
+      <module name="mobile-user-mgmt" target="1.8" />
+      <module name="mobile-user-service" target="1.8" />
+      <module name="qibao-activity-api" target="1.8" />
+      <module name="qibao-activity-core" target="1.8" />
+      <module name="qibao-activity-service" target="1.8" />
+      <module name="qibao-backend-api" target="1.8" />
+      <module name="qibao-backend-service" target="1.8" />
+      <module name="qibao-backend-service (1)" target="1.8" />
+      <module name="qibao-backend-service-core" target="1.8" />
+      <module name="qibao-backend-webapi" target="1.8" />
+      <module name="qibao-common" target="1.8" />
+      <module name="qibao-common-api" target="1.8" />
+      <module name="qibao-common-api (1)" target="1.8" />
+      <module name="qibao-common-service" target="1.8" />
+      <module name="qibao-common-service-core" target="1.8" />
+      <module name="qibao-common-service-core (1)" target="1.8" />
+      <module name="qibao-common-service-feign" target="1.8" />
+      <module name="qibao-common-service-feign (1)" target="1.8" />
+      <module name="qibao-frontend-service" target="1.8" />
+      <module name="qibao-goods-api" target="1.8" />
+      <module name="qibao-goods-service" target="1.8" />
+      <module name="qibao-goods-service-core" target="1.8" />
+      <module name="qibao-goods-service-feign" target="1.8" />
+      <module name="qibao-order-api" target="1.8" />
+      <module name="qibao-order-service" target="1.8" />
+      <module name="qibao-order-service-core" target="1.8" />
+      <module name="qibao-payment-api" target="1.8" />
+      <module name="qibao-payment-service" target="1.8" />
+      <module name="qibao-payment-service-core" target="1.8" />
+      <module name="qibao-user-service" target="1.8" />
+      <module name="qibao-user-service-api" target="1.8" />
+      <module name="qibao-user-service-core" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

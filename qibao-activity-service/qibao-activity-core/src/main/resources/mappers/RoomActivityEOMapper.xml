@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qibao.activity.mapper.RoomActivityEOMapper" >
+  <resultMap id="BaseResultMap" type="com.qibao.activity.entity.RoomActivityEO" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="room_id" property="roomId" jdbcType="BIGINT" />
+    <result column="activity_no" property="activityNo" jdbcType="VARCHAR" />
+    <result column="lottery_type" property="lotteryType" jdbcType="TINYINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="lottery_time" property="lotteryTime" jdbcType="TIMESTAMP" />
+    <result column="lottery_num" property="lotteryNum" jdbcType="INTEGER" />
+    <result column="activity_type" property="activityType" jdbcType="TINYINT" />
+    <result column="room_password" property="roomPassword" jdbcType="VARCHAR" />
+    <result column="total_gold" property="totalGold" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="active_status" property="activeStatus" jdbcType="TINYINT" />
+    <result column="people_num" property="peopleNum" jdbcType="INTEGER" />
+    <result column="is_live_room" property="isLiveRoom" jdbcType="TINYINT" />
+    <result column="live_room_url" property="liveRoomUrl" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="verify_status" property="verifyStatus" jdbcType="TINYINT" />
+    <result column="total_upvote" property="totalUpvote" jdbcType="INTEGER" />
+    <result column="max_join_people" property="maxJoinPeople" jdbcType="INTEGER" />
+    <result column="remain_gold" property="remainGold" jdbcType="DOUBLE" />
+    <result column="lottery_status" property="lotteryStatus" jdbcType="TINYINT" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

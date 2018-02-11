@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.backend.mapper.UserEOMapper">
+    <resultMap id="BaseResultMap" type="com.qibao.backend.entity.UserEO">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="login_account" jdbcType="VARCHAR" property="loginAccount"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="service_qq" jdbcType="VARCHAR" property="serviceQq"/>
+        <result column="service_name" jdbcType="VARCHAR" property="serviceName"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
+    </resultMap>
+    <resultMap id="WithRoleResult" type="com.qibao.backend.entity.UserEOWithRole">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="login_account" jdbcType="VARCHAR" property="loginAccount"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="service_qq" jdbcType="VARCHAR" property="serviceQq"/>
+        <result column="service_name" jdbcType="VARCHAR" property="serviceName"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    </resultMap>
+
+    <sql id="whereSql">
+        <if test="loginAccount!=null">
+            AND login_account LIKE concat('%',#{loginAccount},'%')
+        </if>
+        <if test="realName!=null">
+            AND real_name LIKE concat('%',#{realName},'%')
+        </if>
+        <if test="phoneNumber!=null">
+            AND phone_number LIKE concat('%',#{phoneNumber},'%')
+        </if>
+        <if test="lastUpdateTime!=null">
+            AND last_update_time=#{lastUpdateTime}
+        </if>
+        <if test="serviceQq!=null">
+            AND service_qq LIKE concat('%',#{serviceQq},'%')
+        </if>
+        <if test="serviceName!=null">
+            AND service_name LIKE concat('%',#{serviceName},'%')
+        </if>
+        <if test="startLastLoginTime!=null">
+            <![CDATA[
+            AND last_login_time >= #{startLastLoginTime}
+            ]]>
+        </if>
+        <if test="endLastLoginTime!=null">
+            <![CDATA[
+            AND last_login_time <= #{endLastLoginTime}
+            ]]>
+        </if>
+        <if test="lastLoginIp!=null">
+            AND last_login_ip=#{lastLoginIp}
+        </if>
+        <if test="roleName!=null">
+            AND role_name LIKE concat('%',#{roleName},'%')
+        </if>
+        <if test="email!=null">
+            AND email LIKE concat('%',#{email},'%')
+        </if>
+        <if test="is_service!=null">
+            AND service_qq IS NOT NULL
+        </if>
+    </sql>
+    <select id="selectWithRole" resultMap="WithRoleResult">
+        SELECT
+        a.*,c.role_name
+        FROM t_backend_users a
+        LEFT JOIN t_backend_user_role b ON a.id=b.user_id
+        LEFT JOIN t_backend_role c ON b.role_id =c.id
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="roleId!=null">
+                    AND c.id = #{roleId}
+                </if>
+                <if test="isDeleted!=null">
+                    AND a.is_deleted=#{isDeleted}
+                </if>
+                <if test="id!=null">
+                    AND a.id=#{id}
+                </if>
+                <include refid="whereSql"></include>
+                <if test="orderBy != null and orderBy != ''">
+                    ORDER BY ${orderBy}
+                </if>
+                <if test="order != null and order != ''">
+                    ${order}
+                </if>
+                <if test="pageSize != null">
+                    LIMIT #{pageSize}
+                </if>
+                <if test="start != null">
+                    OFFSET #{start}
+                </if>
+            </trim>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qibao.activity.mapper.UserPrizeEOMapper">
+    <resultMap id="BaseResultMap" type="com.qibao.activity.entity.UserPrizeEO">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="relate_id" property="relateId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="prize_type" property="prizeType" jdbcType="INTEGER"/>
+        <result column="win_gold" property="winGold" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="prize_unit" property="prizeUnit" jdbcType="VARCHAR"/>
+        <result column="box_gold_pond" property="boxGoldPond" jdbcType="DOUBLE"/>
+        <result column="box_gold_pond_overflow" property="boxGoldPondOverflow" jdbcType="DOUBLE"/>
+        <result column="box_num" jdbcType="DOUBLE" property="boxNum"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ResultUserPrizeVO" type="com.qibao.activity.entity.vo.UserPrizeVO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="relate_id" property="relateId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="prize_type" property="prizeType" jdbcType="INTEGER"/>
+        <result column="win_gold" property="winGold" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+        <result column="prize_name" jdbcType="VARCHAR" property="prizeName" />
+        <result column="prize_num" jdbcType="INTEGER" property="prizeNum" />
+        <result column="prize_unit" jdbcType="VARCHAR" property="prizeUnit" />
+    </resultMap>
+
+    <resultMap id="ResultUserPrizeLotteryGoldVO" type="com.qibao.activity.entity.vo.UserPrizeLotteryGoldVO">
+        <result column="box_num" jdbcType="DOUBLE" property="boxNum"/>
+        <result column="win_gold" jdbcType="DOUBLE" property="winGold"/>
+        <result column="box_gold_pond" jdbcType="DOUBLE" property="boxGoldPond"/>
+        <result column="box_gold_pond_overflow" jdbcType="DOUBLE" property="boxGoldPondOverflow"/>
+        <result column="box_gold_pond_total" jdbcType="DOUBLE" property="boxGoldPondTotal"/>
+        <result column="box_gold_pond_overflow_total" jdbcType="DOUBLE" property="boxGoldPondOverflowTotal"/>
+    </resultMap>
+
+    <!--查询夺宝最近中奖记录sql,夺宝抽奖prize_type=2-->
+    <select id="selectRecentlyBoxPrizeList" parameterType="map" resultMap="ResultUserPrizeVO">
+        select t2.nick_name,t2.user_img,t3.prize_name,t3.prize_num,t3.prize_unit,t.* from t_user_prize t
+        left join t_user t2 on t2.id=t.user_id
+        left join t_prize t3 on t3.id=t.relate_id
+        where t.prize_type=2
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null and limit != ''">
+            limit ${limit}
+        </if>
+    </select>
+
+    <!--查询房间最近中奖记录sql,房间中奖prize_type=1-->
+    <select id="selectRecentlyRoomPrizeList" parameterType="map" resultMap="ResultUserPrizeVO">
+        select t2.nick_name,t2.user_img,t.* from t_user_prize t
+        left join t_user t2 on t2.id=t.user_id
+        where t.prize_type=1
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null and limit != ''">
+            limit ${limit}
+        </if>
+    </select>
+
+    <!--查询上榜总消耗房主sql,建房消耗prize_type=4-->
+    <select id="selectAllConsumeRoomPrizeList" parameterType="map" resultMap="ResultUserPrizeVO">
+        select t2.nick_name,t2.user_img,tt.* from
+        (select t.user_id,sum(t.win_gold) win_gold,t.prize_type from t_user_prize t
+        where t.prize_type=4
+        group by t.user_id) tt
+        left join t_user t2 on t2.id=tt.user_id
+        where t2.is_forbid=false and t2.is_deleted=false
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null and limit != ''">
+            limit ${limit}
+        </if>
+    </select>
+
+    <!--查询周榜消耗房主sql,建房消耗prize_type=4-->
+    <select id="selectWeekConsumeRoomPrizeList" parameterType="map" resultMap="ResultUserPrizeVO">
+        select t2.nick_name,t2.user_img,tt.* from
+        (select t.user_id,sum(t.win_gold) win_gold,DATE_FORMAT(t.create_time,'%Y%u') weeks
+        ,t.prize_type from t_user_prize t
+        where t.prize_type=4
+        group by t.user_id,weeks) tt
+        left join t_user t2 on t2.id=tt.user_id
+        where tt.weeks=DATE_FORMAT(SYSDATE(),'%Y%u')
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        <if test="limit != null and limit != ''">
+            limit ${limit}
+        </if>
+    </select>
+
+    <!--查询夺金抽奖金币平衡数据-->
+    <select id="selectLotteryGoldToDay" parameterType="map" resultMap="ResultUserPrizeLotteryGoldVO">
+        <![CDATA[
+        select sum(t.box_num) box_num,sum(t.win_gold) win_gold
+        ,sum(t.box_gold_pond) box_gold_pond,sum(t.box_gold_pond_overflow) box_gold_pond_overflow
+        ,(select sum(t.box_gold_pond) from t_user_prize t where t.prize_type=2
+        and t.create_time<=#{endDateStr}) box_gold_pond_total
+        ,(select sum(t.box_gold_pond_overflow) from t_user_prize t where t.prize_type=2
+        and t.create_time<=#{endDateStr}) box_gold_pond_overflow_total
+        from t_user_prize t
+        where t.prize_type=2 and t.create_time>=#{beginDateStr} and t.create_time<=#{endDateStr}
+        ]]>
+    </select>
+</mapper>

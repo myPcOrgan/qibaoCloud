@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qibao.backend.mapper.BackendLogEOMapper" >
+  <resultMap id="BaseResultMap" type="com.qibao.backend.entity.BackendLogEO" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="descripe" property="descripe" jdbcType="VARCHAR" />
+    <result column="module_type" property="moduleType" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <select id="listBackendLogByMap" parameterType="map" resultMap="BaseResultMap">
+    select * from t_backend_log
+    <include refid="selectSql" />
+    <if test="orderBy != null and orderBy != ''">
+      ORDER BY ${orderBy}
+    </if>
+    <if test="ORDER != null and ORDER != ''">
+      ${ORDER}
+    </if>
+  </select>
+
+  <sql id="selectSql">
+    <where>
+      <trim prefixOverrides="AND">
+        <if test="id != null">
+          AND id = #{id}
+        </if>
+        <if test="userId != null">
+          AND user_id = #{userId}
+        </if>
+        <if test="userName != null and userName != ''">
+          AND user_name like concat("%",#{userName},"%")
+        </if>
+        <if test="ip != null and ip != ''">
+          AND ip = #{ip}
+        </if>
+        <if test="descripe != null and descripe != ''">
+          AND descripe like concat("%",#{descripe},"%")
+        </if>
+        <if test="moduleType != null">
+          AND module_type = #{moduleType}
+        </if>
+        <if test="moduleTypeList != null">
+          AND module_type in
+          <foreach collection="moduleTypeList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+          </foreach>
+        </if>
+        <if test="createStartTime != null ">
+          <![CDATA[ AND create_time >= #{createStartTime} ]]>
+        </if>
+        <if test="createEndTime != null ">
+          <![CDATA[ AND create_time <= #{createEndTime} ]]>
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <select id="countByMap" parameterType="map" resultType="int">
+    select count(*) from t_backend_log
+    <include refid="selectSql" />
+  </select>
+</mapper>

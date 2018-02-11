@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mobile-user-service:war">
+    <output-path>$PROJECT_DIR$/../user-service/service/target</output-path>
+    <root id="archive" name="mobile-user-service.war">
+      <element id="artifact" artifact-name="mobile-user-service:war exploded" />
+    </root>
+  </artifact>
+</component>

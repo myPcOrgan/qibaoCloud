@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.goods.mapper.SysDictEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.goods.entity.SysDictEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="fd_parent" jdbcType="BIGINT" property="fdParent" />
+    <result column="dict_code" jdbcType="VARCHAR" property="dictCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+  </resultMap>
+</mapper>

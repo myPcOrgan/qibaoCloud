@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/qibao-activity-service/qibao-activity-api/qibao-activity-api.iml" filepath="$PROJECT_DIR$/qibao-activity-service/qibao-activity-api/qibao-activity-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-activity-service/qibao-activity-core/qibao-activity-core.iml" filepath="$PROJECT_DIR$/qibao-activity-service/qibao-activity-core/qibao-activity-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-activity-service/qibao-activity-service.iml" filepath="$PROJECT_DIR$/qibao-activity-service/qibao-activity-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-backend-service/qibao-backend-api/qibao-backend-api.iml" filepath="$PROJECT_DIR$/qibao-backend-service/qibao-backend-api/qibao-backend-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-backend-service/qibao-backend-service (1).iml" filepath="$PROJECT_DIR$/qibao-backend-service/qibao-backend-service (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-backend-service/qibao-backend-service-core/qibao-backend-service-core.iml" filepath="$PROJECT_DIR$/qibao-backend-service/qibao-backend-service-core/qibao-backend-service-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-backend-webapi/qibao-backend-webapi.iml" filepath="$PROJECT_DIR$/qibao-backend-webapi/qibao-backend-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-common/qibao-common.iml" filepath="$PROJECT_DIR$/qibao-common/qibao-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-frontend-webapi/qibao-frontend-service.iml" filepath="$PROJECT_DIR$/qibao-frontend-webapi/qibao-frontend-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-goods-service/qibao-goods-api/qibao-goods-api.iml" filepath="$PROJECT_DIR$/qibao-goods-service/qibao-goods-api/qibao-goods-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-goods-service/qibao-goods-service.iml" filepath="$PROJECT_DIR$/qibao-goods-service/qibao-goods-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-goods-service/qibao-goods-service-core/qibao-goods-service-core.iml" filepath="$PROJECT_DIR$/qibao-goods-service/qibao-goods-service-core/qibao-goods-service-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-order-service/qibao-order-api/qibao-order-api.iml" filepath="$PROJECT_DIR$/qibao-order-service/qibao-order-api/qibao-order-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-order-service/qibao-order-service.iml" filepath="$PROJECT_DIR$/qibao-order-service/qibao-order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-order-service/qibao-order-service-core/qibao-order-service-core.iml" filepath="$PROJECT_DIR$/qibao-order-service/qibao-order-service-core/qibao-order-service-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-payment-service/qibao-payment-api/qibao-payment-api.iml" filepath="$PROJECT_DIR$/qibao-payment-service/qibao-payment-api/qibao-payment-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-payment-service/qibao-payment-service.iml" filepath="$PROJECT_DIR$/qibao-payment-service/qibao-payment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-payment-service/qibao-payment-service-core/qibao-payment-service-core.iml" filepath="$PROJECT_DIR$/qibao-payment-service/qibao-payment-service-core/qibao-payment-service-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-user-service/qibao-user-service.iml" filepath="$PROJECT_DIR$/qibao-user-service/qibao-user-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-user-service/qibao-user-service-api/qibao-user-service-api.iml" filepath="$PROJECT_DIR$/qibao-user-service/qibao-user-service-api/qibao-user-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao-user-service/qibao-user-service-core/qibao-user-service-core.iml" filepath="$PROJECT_DIR$/qibao-user-service/qibao-user-service-core/qibao-user-service-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/qibaoX.iml" filepath="$PROJECT_DIR$/.idea/qibaoX.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="qibao-common-service-core (1):war">
+    <output-path>$PROJECT_DIR$/qibao-goods-service/qibao-common-service-core/target</output-path>
+    <root id="archive" name="qibao-goods-service-core-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="qibao-common-service-core (1):war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qibao.goods.mapper.SysHelpEOMapper">
+  <resultMap id="BaseResultMap" type="com.qibao.goods.entity.SysHelpEO">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cate" jdbcType="BIGINT" property="cate" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="link_url" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="list_order" jdbcType="INTEGER" property="listOrder" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+</mapper>
